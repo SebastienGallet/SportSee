@@ -1,0 +1,33 @@
+@import '../utils/variables.scss';
+
+.vertical-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $colorprimary;
+    top: 0px;
+    left: 0px;
+    width: 117px;
+    height: 100vh;
+    position: fixed;
+    z-index: 2;
+    .copiright {
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+        position: absolute;
+        bottom: 59px;
+        font-weight: 500;
+        font-size: 12px;
+        color: white;
+    }
+    .icons-vertical-nav {
+        display: flex;
+        flex-direction: column;
+        height: 45%;
+        margin: auto;
+        a{
+            padding: 10px;
+        }
+    }
+}
