@@ -6,7 +6,7 @@ import logo from '../../assets/logo.webp';
 function Header() {
     return (
         <header>
-            <img src={logo} alt='logo sportsee' />
+            <h1><img src={logo} alt='logo sportsee' /></h1>
             <nav>
                 <a href='#'>Accueil</a>
                 <a href='#'>Profil</a>

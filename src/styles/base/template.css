@@ -1,3 +1,12 @@
 body {
   min-width: 720px;
+}
+
+* {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  font-family: "Roboto", sans-serif;
 }/*# sourceMappingURL=template.css.map */

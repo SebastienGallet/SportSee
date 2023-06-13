@@ -1,0 +1,13 @@
+@import '../utils/variables.scss';
+
+.user-dashboard {
+    margin: auto;
+    h2 {
+        font-size: 48px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        .firstname {
+            color: red;
+        }
+    }
+}

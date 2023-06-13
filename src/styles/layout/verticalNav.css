@@ -8,8 +8,8 @@
   left: 0px;
   width: 117px;
   height: 100vh;
-  position: fixed;
-  z-index: 2;
+  position: relative;
+  overflow: hidden;
 }
 .vertical-nav .copiright {
   writing-mode: vertical-lr;
@@ -19,6 +19,7 @@
   font-weight: 500;
   font-size: 12px;
   color: white;
+  bottom: 120px;
 }
 .vertical-nav .icons-vertical-nav {
   display: flex;

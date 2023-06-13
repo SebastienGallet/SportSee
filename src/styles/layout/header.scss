@@ -4,10 +4,12 @@ header {
     background-color: $colorprimary;
     display: flex;
     flex-direction: row;
-    z-index: 3;
-    img {
-        width: 178px;
-        margin: 18px 28px;
+    h1 {
+        margin: 0;
+        img {
+            width: 178px;
+            margin: 18px 28px;
+        }
     }
     nav {
         display: flex;
