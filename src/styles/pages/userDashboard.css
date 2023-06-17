@@ -1,5 +1,6 @@
 .user-dashboard {
   margin: auto;
+  width: 80%;
 }
 .user-dashboard h2 {
   font-size: 48px;
@@ -8,4 +9,43 @@
 }
 .user-dashboard h2 .firstname {
   color: red;
+}
+.user-dashboard .user-stats {
+  display: flex;
+  flex-direction: row;
+}
+.user-dashboard .user-stats .user-stats-graph {
+  width: 80%;
+}
+.user-dashboard .user-stats .user-stats-graph canvas {
+  width: 100%;
+  height: 100%;
+}
+.user-dashboard .user-stats .user-stats-card {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.user-dashboard .user-stats .user-stats-card .stats {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.user-dashboard .user-stats .user-stats-card .stats svg {
+  margin: auto;
+}
+.user-dashboard .user-stats .user-stats-card .stats .count {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.user-dashboard .user-stats .user-stats-card .stats .count .user-stats-card-value {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  color: black;
+  margin-bottom: 2px;
 }/*# sourceMappingURL=userDashboard.css.map */

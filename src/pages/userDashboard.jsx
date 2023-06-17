@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import mockedData from '../data/mockeddata.json';
-import { useEffect } from 'react';
+import React from 'react';
+import StatsCard from '../components/UserDashboard/statsCard';
+import UserInfo from '../components/UserDashboard/userInfo';
+import StatGraph from '../components/UserDashboard/statsGraph';
+import userData from '../data/mockeddata.json';
+import 'chart.js/auto';
 
 function UserDashboard() {
-  const { userId } = useParams(); 
-  // React-router-dom pour récupérer le paramètre d'identifiant de l'utilisateur
-
-  const [user, setUser] = useState({});
-
-  // Utiliser les données importées pour récupérer les informations de l'utilisateur
-  const userData = mockedData.USER_MAIN_DATA.find((item) => item.id === parseInt(userId));
-
-  // Mettre à jour l'état de l'utilisateur avec les données récupérées
-  useEffect(() => {
-    setUser(userData);
-  }, [userData]);
+  const userIndex = 0;
+  const user = userData.USER_ACTIVITY[userIndex];
 
   return (
     <div className="user-dashboard">
-      <h2>Bonjour <span className='firstname'>{user.userInfos?.firstName}</span></h2>
-      <p className='congrats'>Felicitation ! Vous avez explosé vos objectifs hier 👏</p>
+      <UserInfo />
+      <div className='user-stats'>
+        <section className='user-stats-graph'>
+          <StatGraph userData={user} />
+        </section>
+        <StatsCard />
+      </div>      
     </div>
   );
 }

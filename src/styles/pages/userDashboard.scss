@@ -2,6 +2,7 @@
 
 .user-dashboard {
     margin: auto;
+    width: 80%;
     h2 {
         font-size: 48px;
         font-weight: 600;
@@ -9,5 +10,45 @@
         .firstname {
             color: red;
         }
+    }
+    .user-stats {
+        display: flex;
+        flex-direction: row;
+        .user-stats-graph {
+            width: 80%;
+            canvas {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .user-stats-card {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .stats {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                svg {
+                    margin: auto;
+                }
+                .count {
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    .user-stats-card-value {
+                        font-weight: bold;
+                        font-size: 20px;
+                        line-height: 24px;
+                        color: black;
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+        }
+
     }
 }
