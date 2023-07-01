@@ -1,44 +1,74 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import BarGraph from '../stats/barGraph';
+import LenghtGraph from '../stats/lenghtGraph';
+import PerfGraph from '../stats/perfGraph';
+import ScoreGraph from '../stats/scoreGraph';
 
-const StatGraph = ({ userData }) => {
-    // Récupérer les données de l'utilisateur
-    const { sessions } = userData;
+
+
+const StatGraph = ({ userData, userMainData }) => {
+  // Récupérer les données de l'utilisateur
+  const { sessions, performance } = userData;
+
+
+
+  // const days = sessions.map(session => session.day);
+  const weights = sessions.map(session => session.kilogram);
+  const calories = sessions.map(session => session.calories);
+  const durations = sessions.map(session => session.sessionLength);
+
+  const minWeight = Math.min(...weights) - 1;
+  const maxWeight = Math.max(...weights) + 1;
+  const minCalories = Math.min(...calories) - 50;
+  const maxCalories = Math.max(...calories) + 50;
+  const minSessionLength = Math.min(...durations) - 1;
+  const maxSessionLength = Math.max(...durations) + 1;
+
+  const customLabels = ['1', '2', '3', '4', '5', '6', '7']
+
+  const data = sessions.map((session, index) => ({
+    day: customLabels[index],
+    weight: session.kilogram,
+    calories: session.calories,
+    sessionLength: durations[index],
+    score: session.score,
+  }));
+
+
+  const dataPie = [
+    { name: 'Score', value: userMainData.score, color: '#ff0101' },
+    { name: 'Score', value: 1 - userMainData.score, color: 'transparent' },
+  ];
   
-    const days = sessions.map(session => session.day);
-    const weights = sessions.map(session => session.kilogram);
-    const calories = sessions.map(session => session.calories);
   
-    const data = {
-      labels: days,
-      datasets: [
-        {
-          label: 'Poids (kg)',
-          backgroundColor: 'black',
-          borderRadius: 8,
-          borderWidth: 1,
-          data: weights,
-        },
-        {
-          label: 'Calories brûlées',
-          backgroundColor: 'red',
-          borderRadius: 8,
-          borderWidth: 1,
-          data: calories,
-        },
-      ],
-    };
-  
-    // Options du graphique
-    const options = {
-      scales: {
-        y: {
-          beginAtZero: false,
-        },
-      },
-    };
-  
-    return <Bar data={data} options={options} />;
+  const todayScore = userMainData.score;
+
+  const kindLabels = {
+    1: 'Intensité',
+    2: 'Vitesse',
+    3: 'Endurance',
+    4: 'Force',
+    5: 'Rapidité',
+    6: 'Énergie',
   };
-  
-  export default StatGraph;
+
+  const performanceData = performance.map(item => ({
+    subject: kindLabels[item.kind],
+    value: item.value,
+  }));
+
+  return (
+    <section className='user-stats-graph'>
+      <div className='maingraph'>
+        <BarGraph data={data} minWeight={minWeight} maxWeight={maxWeight} minCalories={minCalories} maxCalories={maxCalories} />
+      </div>
+      <div className='secondgraph'>
+        <LenghtGraph data={data} minSessionLength={minSessionLength} maxSessionLength={maxSessionLength} />
+        <PerfGraph performanceData={performanceData} />
+        <ScoreGraph todayScore={todayScore} dataPie={dataPie} />
+      </div>
+    </section>
+  );
+};
+
+export default StatGraph;

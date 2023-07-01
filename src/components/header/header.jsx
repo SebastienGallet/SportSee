@@ -9,10 +9,10 @@ function Header() {
         <header>
             <h1><img src={logo} alt='logo sportsee' /></h1>
             <nav>
-                <NavLink exact to="/">Accueil</NavLink>
-                <NavLink exact to='#'>Profil</NavLink>
-                <NavLink exact to='#'>Réglages</NavLink>
-                <NavLink exact to='#'>Communauté</NavLink>
+                <NavLink  to="/">Accueil</NavLink>
+                <NavLink  to='#'>Profil</NavLink>
+                <NavLink  to='#'>Réglages</NavLink>
+                <NavLink  to='#'>Communauté</NavLink>
             </nav>
         </header>
     )

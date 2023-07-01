@@ -17,6 +17,10 @@
 .user-dashboard .user-stats .user-stats-graph {
   width: 80%;
 }
+.user-dashboard .user-stats .user-stats-graph .secondgraph {
+  display: flex;
+  flex-direction: row;
+}
 .user-dashboard .user-stats .user-stats-graph canvas {
   width: 100%;
   height: 100%;
