@@ -9,6 +9,19 @@ const StatGraph = ({data, minSessionLength, maxSessionLength }) => {
     return daysOfWeek[index];
   };
 
+  // Composant personnalisé pour l'infobulle
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const sessionLength = payload[0].payload.sessionLength;
+      return (
+        <div style={{ background: '#fff', padding: '5px', border: '1px solid #ccc' }}>
+          {`${sessionLength} min`}
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <ResponsiveContainer width="33%" height={350}>
       <div style={{ position: 'relative', minHeight: '400px' }}>
@@ -31,7 +44,12 @@ const StatGraph = ({data, minSessionLength, maxSessionLength }) => {
             tick={{ fill: '#fff' }}
           />
           <YAxis hide={true} />
-          <Tooltip />
+          <Tooltip
+            formatter={(value) => `${value} min`}
+            labelFormatter={() => ''}
+            content={CustomTooltip} // Utilisation du composant personnalisé pour l'infobulle
+          />
+
           <Line type="monotone" dataKey="sessionLength" stroke="#fff" activeDot={{ r: 8 }} />
         </LineChart>
       </div>

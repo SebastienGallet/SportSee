@@ -2,12 +2,15 @@
   margin: auto;
   width: 80%;
 }
-.user-dashboard h2 {
+.user-dashboard .user-infos {
+  margin-bottom: 80px;
+}
+.user-dashboard .user-infos h2 {
   font-size: 48px;
   font-weight: 600;
   margin-bottom: 40px;
 }
-.user-dashboard h2 .firstname {
+.user-dashboard .user-infos h2 .firstname {
   color: red;
 }
 .user-dashboard .user-stats {
@@ -16,6 +19,39 @@
 }
 .user-dashboard .user-stats .user-stats-graph {
   width: 80%;
+}
+.user-dashboard .user-stats .user-stats-graph .maingraph .legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 60px;
+}
+.user-dashboard .user-stats .user-stats-graph .maingraph .legend h3 {
+  font-weight: 500;
+  font-size: 18px;
+}
+.user-dashboard .user-stats .user-stats-graph .maingraph .legend .legend-item {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  justify-content: space-between;
+}
+.user-dashboard .user-stats .user-stats-graph .maingraph .legend .legend-item p {
+  font-size: 18px;
+}
+.user-dashboard .user-stats .user-stats-graph .maingraph .legend .legend-item p .black-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+  margin-right: 10px;
+}
+.user-dashboard .user-stats .user-stats-graph .maingraph .legend .legend-item p .red-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 10px;
 }
 .user-dashboard .user-stats .user-stats-graph .secondgraph {
   display: flex;

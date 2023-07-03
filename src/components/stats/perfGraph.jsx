@@ -11,7 +11,7 @@ const perfGraph = ({ performanceData }) => {
         data={performanceData}
         style={{ backgroundColor: '#282D30', borderRadius: '10px' }}
       >
-        <PolarGrid gridType="circle" stroke="#fff" />
+        <PolarGrid gridType="polygon" stroke="#fff" />
         <PolarAngleAxis dataKey="subject" tick={{ fill: '#fff' }} />
         <PolarRadiusAxis tick={null} />
         <Radar name="Performance" dataKey="value" stroke="none" fill="red" fillOpacity={0.6} />

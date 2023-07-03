@@ -3,12 +3,15 @@
 .user-dashboard {
     margin: auto;
     width: 80%;
-    h2 {
-        font-size: 48px;
-        font-weight: 600;
-        margin-bottom: 40px;
-        .firstname {
-            color: red;
+    .user-infos {
+        margin-bottom: 80px;
+        h2 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            .firstname {
+                color: red;
+            }
         }
     }
     .user-stats {
@@ -16,6 +19,41 @@
         flex-direction: row;
         .user-stats-graph {
             width: 80%;
+            .maingraph {
+                .legend {
+                    display:flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-right: 60px;
+                    h3 {
+                        font-weight: 500;
+                        font-size: 18px;
+                    }
+                    .legend-item {
+                        display: flex;
+                        flex-direction: row;
+                        width: 30%;
+                        justify-content: space-between;
+                        p {
+                            font-size: 18px;
+                            .black-circle {
+                                width: 10px;
+                                height: 10px;
+                                border-radius: 50%;
+                                background-color: black;
+                                margin-right: 10px;
+                            }
+                            .red-circle {
+                                width: 10px;
+                                height: 10px;
+                                border-radius: 50%;
+                                background-color: red;
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
             .secondgraph {
                 display: flex;
                 flex-direction: row;

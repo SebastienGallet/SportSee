@@ -4,18 +4,12 @@ import LenghtGraph from '../stats/lenghtGraph';
 import PerfGraph from '../stats/perfGraph';
 import ScoreGraph from '../stats/scoreGraph';
 
-
-
 const StatGraph = ({ userData, userMainData }) => {
-  // Récupérer les données de l'utilisateur
   const { sessions, performance } = userData;
 
-
-
-  // const days = sessions.map(session => session.day);
-  const weights = sessions.map(session => session.kilogram);
-  const calories = sessions.map(session => session.calories);
-  const durations = sessions.map(session => session.sessionLength);
+  const weights = sessions.map((session) => session.kilogram);
+  const calories = sessions.map((session) => session.calories);
+  const durations = sessions.map((session) => session.sessionLength);
 
   const minWeight = Math.min(...weights) - 1;
   const maxWeight = Math.max(...weights) + 1;
@@ -24,7 +18,7 @@ const StatGraph = ({ userData, userMainData }) => {
   const minSessionLength = Math.min(...durations) - 1;
   const maxSessionLength = Math.max(...durations) + 1;
 
-  const customLabels = ['1', '2', '3', '4', '5', '6', '7']
+  const customLabels = ['1', '2', '3', '4', '5', '6', '7'];
 
   const data = sessions.map((session, index) => ({
     day: customLabels[index],
@@ -34,13 +28,11 @@ const StatGraph = ({ userData, userMainData }) => {
     score: session.score,
   }));
 
-
   const dataPie = [
     { name: 'Score', value: userMainData.score, color: '#ff0101' },
     { name: 'Score', value: 1 - userMainData.score, color: 'transparent' },
   ];
-  
-  
+
   const todayScore = userMainData.score;
 
   const kindLabels = {
@@ -52,18 +44,28 @@ const StatGraph = ({ userData, userMainData }) => {
     6: 'Énergie',
   };
 
-  const performanceData = performance.map(item => ({
+  const performanceData = performance.map((item) => ({
     subject: kindLabels[item.kind],
     value: item.value,
   }));
 
   return (
-    <section className='user-stats-graph'>
-      <div className='maingraph'>
-        <BarGraph data={data} minWeight={minWeight} maxWeight={maxWeight} minCalories={minCalories} maxCalories={maxCalories} />
+    <section className="user-stats-graph">
+      <div className="maingraph">
+        <BarGraph
+          data={data}
+          minWeight={minWeight}
+          maxWeight={maxWeight}
+          minCalories={minCalories}
+          maxCalories={maxCalories}
+        />
       </div>
-      <div className='secondgraph'>
-        <LenghtGraph data={data} minSessionLength={minSessionLength} maxSessionLength={maxSessionLength} />
+      <div className="secondgraph">
+        <LenghtGraph
+          data={data}
+          minSessionLength={minSessionLength}
+          maxSessionLength={maxSessionLength}
+        />
         <PerfGraph performanceData={performanceData} />
         <ScoreGraph todayScore={todayScore} dataPie={dataPie} />
       </div>
