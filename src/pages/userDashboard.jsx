@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StatsCard from '../components/stats/statsCard';
 import UserInfo from '../components/UserDashboard/userInfo';
 import StatGraph from '../components/UserDashboard/statsGraph';
-import userData from '../data/mockeddata.json';
-import 'chart.js/auto';
 import { useParams } from 'react-router-dom';
+import { getUserData } from '../apiServices';
 
 function UserDashboard() {
   const { userId } = useParams();
-  const userIndex = userData.USER_ACTIVITY.findIndex(
-    user => user.userId === parseInt(userId)
-  );
-  const user = userData.USER_ACTIVITY[userIndex];
-  const userPerformance = userData.USER_PERFORMANCE[userIndex];
-  const userMainData = userData.USER_MAIN_DATA[userIndex];
+  const [userData, setUserData] = useState(null);
+  const [userMainData, setUserMainData] = useState(null);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { user, userMainData } = await getUserData(userId);
+        setUserData(user);
+        setUserMainData(userMainData);
+      } catch (error) {
+      }
+    }
 
+    fetchData();
+  }, [userId]);
 
-  user.performance = userPerformance.data;
+  if (!userData || !userMainData) {
+    return <div>Loading...</div>;
+  }
 
-
-  user.sessions.forEach((session, index) => {
-    session.sessionLength = userData.USER_AVERAGE_SESSIONS[userIndex].sessions[index].sessionLength;
-  });
-  
+  if (!userData.sessions) {
+    return <div>No session data available.</div>;
+  }
 
   return (
     <div className="user-dashboard">
       <UserInfo />
       <div className='user-stats'>
-        <StatGraph userData={user} userMainData={userMainData}/>
+        <StatGraph userData={userData} userMainData={userMainData}/>
         <StatsCard />
       </div>      
     </div>
