@@ -1,3 +1,11 @@
 .users {
-  margin-left: 15rem;
+  margin: auto;
+}
+.users .link {
+  color: black;
+  text-decoration: none;
+  margin: 10px;
+}
+.users .link:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=users.css.map */

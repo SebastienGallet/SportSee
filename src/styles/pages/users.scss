@@ -1,5 +1,14 @@
 @import '../utils/variables.scss';
 
 .users {
-    margin-left: 15rem;
+    margin: auto;
+    .link {
+        color: black;
+        text-decoration: none;
+        margin: 10px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
+

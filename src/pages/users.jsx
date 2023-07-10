@@ -4,9 +4,8 @@ import { NavLink } from 'react-router-dom';
 function Users() {
   return (
     <div className="users">
-        <h2>Users</h2>
-        <NavLink to="/users/12">Karl</NavLink>
-        <NavLink to="/users/18">Cecilia</NavLink>
+        <NavLink className="link" to="/users/12">Karl</NavLink>
+        <NavLink className="link" to="/users/18">Cecilia</NavLink>
     </div>
   )
 }
