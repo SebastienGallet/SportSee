@@ -3,7 +3,7 @@ import {ResponsiveContainer, Pie, PieChart, Cell } from 'recharts';
 
 const scoreGraph = ({todayScore, dataPie}) => {
     return (
-        <ResponsiveContainer width="33%" height={350}>
+        <ResponsiveContainer width="33%" height={350} minWidth={400}>
             <PieChart
               className="pieChartContent"
               width={258}

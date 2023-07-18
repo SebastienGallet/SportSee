@@ -29,4 +29,10 @@
 }
 .vertical-nav .icons-vertical-nav a {
   padding: 10px;
+}
+
+@media (max-width: 1505px) {
+  .vertical-nav {
+    height: auto;
+  }
 }/*# sourceMappingURL=verticalNav.css.map */

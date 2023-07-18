@@ -3,7 +3,7 @@ import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadius
 
 const perfGraph = ({ performanceData }) => {
   return (
-    <ResponsiveContainer width="33%" height={350}>
+    <ResponsiveContainer width="33%" height={350} minWidth={400}>
       <RadarChart
         cx="50%"
         cy="50%"

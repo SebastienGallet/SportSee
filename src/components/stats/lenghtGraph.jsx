@@ -23,14 +23,15 @@ const StatGraph = ({data, minSessionLength, maxSessionLength }) => {
   };
 
   return (
-    <ResponsiveContainer width="33%" height={350}>
-      <div style={{ position: 'relative', minHeight: '400px' }}>
+    <ResponsiveContainer width="30%" height={350} minWidth={'400px'}>
+      <div style={{ position: 'relative', minHeight: '400px'}}>
         <div style={{ position: 'absolute', top: '10px', left: '10px', color: '#fff', fontWeight: 'bold' }}>
           Durée des sessions
         </div>
         <LineChart
           width={400}
           height={350}
+
           data={data}
           margin={{top: 8, right: 8, left: 8, bottom: 8}}
           style={{ backgroundColor: 'red', borderRadius: '10px' }}
