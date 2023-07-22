@@ -1,23 +1,43 @@
-import userData from './data/mockeddata.json';
+import axios from 'axios';
 
-export function getUserData(userId) {
+const baseURL = 'http://localhost:3000';
+
+export const getUserInfo = async (userId) => {
   try {
-    const userIndex = userData.USER_ACTIVITY.findIndex(
-      user => user.userId === parseInt(userId)
-    );
-    const user = userData.USER_ACTIVITY[userIndex];
-    const userPerformance = userData.USER_PERFORMANCE[userIndex];
-    const userMainData = userData.USER_MAIN_DATA[userIndex];
-
-    user.performance = userPerformance.data;
-
-    user.sessions.forEach((session, index) => {
-      session.sessionLength = userData.USER_AVERAGE_SESSIONS[userIndex].sessions[index].sessionLength;
-    });
-
-    return { user, userMainData };
+    const response = await axios.get(`${baseURL}/user/${userId}`);
+    return response.data;
   } catch (error) {
-    console.error(error);
-    throw error;
+    console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error);
+    return null;
   }
-}
+};
+
+export const getUserActivity = async (userId) => {
+  try {
+    const response = await axios.get(`${baseURL}/user/${userId}/activity`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération de l\'activité de l\'utilisateur:', error);
+    return null;
+  }
+};
+
+export const getUserAverageSessions = async (userId) => {
+  try {
+    const response = await axios.get(`${baseURL}/user/${userId}/average-sessions`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des sessions moyennes de l\'utilisateur:', error);
+    return null;
+  }
+};
+
+export const getUserPerformance = async (userId) => {
+  try {
+    const response = await axios.get(`${baseURL}/user/${userId}/performance`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération de la performance de l\'utilisateur:', error);
+    return null;
+  }
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, Line, LineChart, CartesianGrid } from 'recharts';
 
-const StatGraph = ({data, minSessionLength, maxSessionLength }) => {
+const StatGraph = ({ data, minSessionLength, maxSessionLength }) => {
 
   const formatDayOfWeek = (tickItem) => {
     const daysOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
@@ -9,13 +9,11 @@ const StatGraph = ({data, minSessionLength, maxSessionLength }) => {
     return daysOfWeek[index];
   };
 
-  // Composant personnalisé pour l'infobulle
-  const CustomTooltip = ({ active, payload }) => {
+  const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      const sessionLength = payload[0].payload.sessionLength;
       return (
-        <div style={{ background: '#fff', padding: '5px', border: '1px solid #ccc' }}>
-          {`${sessionLength} min`}
+        <div className="custom-tooltip">
+          <p className="desc">{`${payload[0].value} min`}</p>
         </div>
       );
     }
@@ -23,37 +21,25 @@ const StatGraph = ({data, minSessionLength, maxSessionLength }) => {
   };
 
   return (
-    <ResponsiveContainer width="30%" height={350} minWidth={'400px'}>
-      <div style={{ position: 'relative', minHeight: '400px'}}>
-        <div style={{ position: 'absolute', top: '10px', left: '10px', color: '#fff', fontWeight: 'bold' }}>
-          Durée des sessions
-        </div>
-        <LineChart
-          width={400}
-          height={350}
+    <ResponsiveContainer width="100%" height={300} minWidth={200}>
+      <LineChart
+        data={data}
+        margin={{ top: 8, right: 8, left: 8, bottom: 8 }}
+        style={{ backgroundColor: 'red', borderRadius: '10px' }}
+      >
+        <CartesianGrid strokeDasharray="3 3" strokeOpacity={0} />
+        <XAxis
+          dataKey="day"
+          tickFormatter={formatDayOfWeek}
+          axisLine={false}
+          tickLine={false}
+          tick={{ fill: '#fff' }}
+        />
+        <YAxis hide={true} />
+        <Tooltip content={<CustomTooltip />} />
 
-          data={data}
-          margin={{top: 8, right: 8, left: 8, bottom: 8}}
-          style={{ backgroundColor: 'red', borderRadius: '10px' }}
-        >
-          <CartesianGrid strokeDasharray="3 3" strokeOpacity={0} />
-          <XAxis
-            dataKey="day"
-            tickFormatter={formatDayOfWeek}
-            axisLine={false}
-            tickLine={false} 
-            tick={{ fill: '#fff' }}
-          />
-          <YAxis hide={true} />
-          <Tooltip
-            formatter={(value) => `${value} min`}
-            labelFormatter={() => ''}
-            content={CustomTooltip} // Utilisation du composant personnalisé pour l'infobulle
-          />
-
-          <Line type="monotone" dataKey="sessionLength" stroke="#fff" activeDot={{ r: 8 }} />
-        </LineChart>
-      </div>
+        <Line type="monotone" dataKey="sessionLength" stroke="#fff" activeDot={{ r: 8 }} />
+      </LineChart>
     </ResponsiveContainer>
   );
 };

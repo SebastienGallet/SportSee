@@ -1,41 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import mockedData from '../../data/mockeddata.json';
-import { useEffect, useState } from 'react';
+import { getUserInfo } from '../../apiServices.js'; // Remplacez par les fonctions d'API appropriées pour récupérer les données nécessaires
 
 function StatsCard() {
-    const { userId } = useParams(); 
-    // React-router-dom pour récupérer le paramètre d'identifiant de l'utilisateur
-  
-    const [user, setUser] = useState({});
-  
-    // Utiliser les données importées pour récupérer les informations de l'utilisateur
-    const userData = mockedData.USER_MAIN_DATA.find((item) => item.id === parseInt(userId));
-  
-    // Mettre à jour l'état de l'utilisateur avec les données récupérées
-    useEffect(() => {
-      setUser(userData);
-    }, [userData]);
+  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const userInfo = await getUserInfo(userId);
+        setUser(userInfo.data.keyData);
+
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+      }
+    }
+
+    fetchData();
+  }, [userId]);
+
+
+
+
 
   return (
-   
     <aside className='user-stats-card'>
-          <div className='stats'>
+      <div className='stats'>
             <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.905 7.86625C10.905 7.86625 11.8375 2.38125 8.03249 0C7.91784 1.90607 6.99682 3.6731 5.49999 4.85875C3.87499 6.2875 0.81874 9.5 0.85124 12.925C0.827424 15.9116 2.49913 18.6534 5.16499 20C5.25931 18.6645 5.88737 17.4233 6.90749 16.5562C7.77187 15.8915 8.33304 14.9074 8.46499 13.825C10.7407 15.0348 12.2125 17.3521 12.34 19.9263V19.9425C14.8552 18.7904 16.5109 16.3241 16.625 13.56C16.895 10.3425 15.1325 5.9675 13.5687 4.5375C12.9784 5.85556 12.0615 7.00126 10.905 7.86625Z" fill="#FF0000"/>
             </svg>
             <div className='count'>
-              <p className='user-stats-card-value'>{user.keyData?.calorieCount}kCal</p>
-              <p className='user-stats-card-title'>Calories</p>
-            </div>
+          <p className='user-stats-card-value'>{user?.calorieCount}kCal</p>
+          <p className='user-stats-card-title'>Calories</p>
+        </div>
           </div>
           <div className='stats'>
             <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18.2353 2.47058C17.8824 2.11764 17.4118 1.88234 17.0588 1.88234C16.9412 1.41176 16.8235 1.05881 16.4706 0.705873C15.6471 -0.117656 14.2353 -0.117656 13.4118 0.705873C12.7059 1.41176 12.5882 2.58823 13.1765 3.41176L10.5882 5.88234L9.29412 4.58823L6.70588 7.17646C6.47059 7.05881 6.11765 7.05881 5.88235 7.05881C2.58824 7.05881 0 9.64705 0 12.9412C0 16.2353 2.58824 18.8235 5.88235 18.8235C9.17647 18.8235 11.7647 16.2353 11.7647 12.9412C11.7647 12.7059 11.7647 12.3529 11.6471 12.1176L14.2353 9.5294L12.9412 8.23528L15.4118 5.7647C16.2353 6.35293 17.4118 6.23529 18.1176 5.5294C19.0588 4.70587 19.0588 3.29411 18.2353 2.47058Z" fill="#4AB8FF"/>
             </svg>
             <div className='count'>
-              <p className='user-stats-card-value'>{user.keyData?.proteinCount}g</p>
-              <p className='user-stats-card-title'>Proteines</p>
+          <p className='user-stats-card-value'>{user?.proteinCount}g</p>
+          <p className='user-stats-card-title'>Proteines</p>
             </div>
           </div>
           <div className='stats'>
@@ -45,7 +51,7 @@ function StatsCard() {
               <path d="M12.005 3.37375C12.6875 2.49875 13.205 1.2625 13.0162 0C11.9025 0.07625 10.6 0.785 9.83873 1.70875C9.14873 2.5475 8.57873 3.79125 8.79998 5C10.0162 5.0375 11.2737 4.31125 12.005 3.37375Z" fill="#FDCC0C"/>
             </svg>
             <div className='count'>
-              <p className='user-stats-card-value'>{user.keyData?.carbohydrateCount}g</p>
+              <p className='user-stats-card-value'>{user?.carbohydrateCount}g</p>
               <p className='user-stats-card-title'>Glucides</p>
             </div>
           </div>
@@ -56,7 +62,7 @@ function StatsCard() {
               <path fillRule="evenodd" clipRule="evenodd" d="M11.25 0H8.75C4.625 0 1.25 3.375 1.25 7.5H18.75C18.75 3.375 15.375 0 11.25 0ZM7.5 5C6.75 5 6.25 4.5 6.25 3.75C6.25 3 6.75 2.5 7.5 2.5C8.25 2.5 8.75 3 8.75 3.75C8.75 4.5 8.25 5 7.5 5ZM12.5 5C12.5 5.75 13 6.25 13.75 6.25C14.5 6.25 15 5.75 15 5C15 4.25 14.5 3.75 13.75 3.75C13 3.75 12.5 4.25 12.5 5Z" fill="#FD5181"/>
             </svg>
             <div className='count'>
-              <p className='user-stats-card-value'>{user.keyData?.lipidCount}g</p>
+              <p className='user-stats-card-value'>{user?.lipidCount}g</p>
               <p className='user-stats-card-title'>Lipides</p>
             </div>
           </div>
