@@ -1,10 +1,10 @@
 @import '../utils/variables.scss';
 
 .user-dashboard {
-    margin: auto;
+    margin: 20px auto;
     width: 80%;
     .user-infos {
-        margin-bottom: 80px;
+        margin-bottom: 30px;
         h2 {
             font-size: 48px;
             font-weight: 600;
@@ -75,6 +75,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding-bottom: 20px;
             .stats {
                 width: 100%;
                 display: flex;

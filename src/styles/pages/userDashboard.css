@@ -1,9 +1,9 @@
 .user-dashboard {
-  margin: auto;
+  margin: 20px auto;
   width: 80%;
 }
 .user-dashboard .user-infos {
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 .user-dashboard .user-infos h2 {
   font-size: 48px;
@@ -75,6 +75,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 20px;
 }
 .user-dashboard .user-stats .user-stats-card .stats {
   width: 100%;
