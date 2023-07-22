@@ -3,13 +3,13 @@ import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadius
 
 const perfGraph = ({ performanceData }) => {
   return (
-    <ResponsiveContainer width="33%" height={350} minWidth={400}>
+    <ResponsiveContainer width="100%" height={300} minWidth={200}>
       <RadarChart
         cx="50%"
         cy="50%"
-        outerRadius="80%"
+        outerRadius="55%"
         data={performanceData}
-        style={{ backgroundColor: '#282D30', borderRadius: '10px' }}
+        style={{ backgroundColor: '#282D30', borderRadius: '10px', margin: '0px 10px' }}
       >
         <PolarGrid gridType="polygon" stroke="#fff" />
         <PolarAngleAxis dataKey="subject" tick={{ fill: '#fff' }} />

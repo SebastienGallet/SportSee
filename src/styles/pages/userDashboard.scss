@@ -1,10 +1,10 @@
 @import '../utils/variables.scss';
 
 .user-dashboard {
-    margin: auto;
+    margin: 20px auto;
     width: 80%;
     .user-infos {
-        margin-bottom: 80px;
+        margin-bottom: 30px;
         h2 {
             font-size: 48px;
             font-weight: 600;
@@ -18,14 +18,17 @@
         display: flex;
         flex-direction: row;
         .user-stats-graph {
-            width: 95%;
+            width: 85%;
             .maingraph {
+                background-color: #FBFBFB;
+                border-radius: 10px;
                 .legend {
                     display:flex;
                     flex-direction: row;
                     justify-content: space-between;
                     margin-right: 60px;
                     h3 {
+                        margin-left: 20px;
                         font-weight: 500;
                         font-size: 18px;
                     }
@@ -58,6 +61,9 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                .custom-tooltip {
+                    background-color: white;
+                }
             }
             canvas {
                 width: 100%;
@@ -65,10 +71,11 @@
             }
         }
         .user-stats-card {
-            width: 5%;
+            width: 15%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding-bottom: 20px;
             .stats {
                 width: 100%;
                 display: flex;
@@ -93,26 +100,5 @@
             }
         }
 
-    }
-}
-
-
-@media  (max-width: 1505px) {
-    .user-dashboard {
-        .user-stats {
-            flex-direction: column;
-            .user-stats-graph{
-                .secondgraph {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-            }
-            .user-stats-card {
-                width: 100%;
-                flex-direction: row;
-                margin-top: 15px;
-            }
-        }
     }
 }
