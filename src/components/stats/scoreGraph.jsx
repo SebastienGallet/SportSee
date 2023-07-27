@@ -51,4 +51,4 @@ const ScoreGraph = ({ todayScore, dataPie }) => {
     )
 }
 
-export default scoreGraph
+export default ScoreGraph;
