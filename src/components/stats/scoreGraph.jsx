@@ -48,7 +48,7 @@ const ScoreGraph = ({ todayScore, dataPie }) => {
         </text>
       </PieChart>
     </ResponsiveContainer>
-  );
-};
+    )
+}
 
-export default ScoreGraph;
+export default scoreGraph

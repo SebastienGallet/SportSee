@@ -3,41 +3,33 @@ import StatsCard from '../components/stats/statsCard';
 import UserInfo from '../components/UserDashboard/userInfo';
 import StatGraph from '../components/UserDashboard/statsGraph';
 import { useParams } from 'react-router-dom';
-import { getUserData } from '../apiServices';
+import {
+  getUserInfo,
+  getUserActivity,
+  getUserAverageSessions,
+  getUserPerformance,
+} from '../apiServices.js';
 
 function UserDashboard() {
   const { userId } = useParams();
   const [userData, setUserData] = useState(null);
-  const [userMainData, setUserMainData] = useState(null);
+  const [userActivity, setUserActivity] = useState([]);
+  const [userAverageSessions, setUserAverageSessions] = useState([]);
+  const [userPerformance, setUserPerformance] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { user, userMainData } = await getUserData(userId);
-        setUserData(user);
-        setUserMainData(userMainData);
-      } catch (error) {
-      }
-    }
 
-    fetchData();
-  }, [userId]);
-
-  if (!userData || !userMainData) {
-    return <div>Loading...</div>;
-  }
-
-  if (!userData.sessions) {
-    return <div>No session data available.</div>;
-  }
 
   return (
     <div className="user-dashboard">
-      <UserInfo />
-      <div className='user-stats'>
-        <StatGraph userData={userData} userMainData={userMainData}/>
-        <StatsCard />
-      </div>      
+      <UserInfo userData={userData} />
+      <div className="user-stats">
+          <StatGraph
+          userId={userId}
+          userData={userData}
+          userMainData={userData}
+        />
+        <StatsCard userActivity={userActivity} userPerformance={userPerformance} />
+      </div>
     </div>
   );
 }
