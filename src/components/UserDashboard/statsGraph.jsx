@@ -12,38 +12,96 @@ const StatGraph = ({ userId }) => {
   const [userAverageSessions, setUserAverageSessions] = useState([]);
   const [userPerformance, setUserPerformance] = useState([]);
 
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    async function fetchData() {
-      try {
-        // Récupérer les données de l'utilisateur depuis l'API
-        const userInfo = await getUserInfo(userId);
-        const userActivityData = await getUserActivity(userId);
-        const userAverageSessionsData = await getUserAverageSessions(userId);
-        const userPerformanceData = await getUserPerformance(userId);
-
-        setUserData(userInfo.data.userInfos);
-        setUserMainData(userInfo.data);
-        setUserActivity(userActivityData.data.sessions); 
-        setUserAverageSessions(userAverageSessionsData.data.sessions);
-        setUserPerformance(userPerformanceData.data.data);
-
-        console.log(userPerformanceData.data.data)
-
-      } catch (error) {
+    getUserInfo(parseInt(userId))
+      .then((userMainData) => {
+        setUserMainData(userMainData);
+        setLoading(false);
+      })
+      .catch((error) => {
         console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
-      }
-    }
-
-    fetchData();
+        setUser({});
+        setLoading(false);
+      });
+      getUserActivity(parseInt(userId))
+        .then((userActivity) => {
+          setUserActivity(userActivity.sessions);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+          setUser({});
+          setLoading(false);
+      });
+      getUserAverageSessions(parseInt(userId))
+      .then((userAverageSessions) => {
+        setUserAverageSessions(userAverageSessions.sessions);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+        setUser({});
+        setLoading(false);
+      });
+      getUserPerformance(parseInt(userId))
+        .then((userPerformance) => {
+          setUserPerformance(userPerformance.data);
+          setLoading(false);
+          }
+          )
+        .catch((error) => {
+          console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+          setUser({});
+          setLoading(false);
+          }
+      );
+      
   }, [userId]);
 
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       // Récupérer les données de l'utilisateur depuis l'API
+  //       const userInfo = await getUserInfo(userId);
+  //       const userActivityData = await getUserActivity(userId);
+  //       const userAverageSessionsData = await getUserAverageSessions(userId);
+  //       const userPerformanceData = await getUserPerformance(userId);
+  //       console.log(userActivityData)
+  //       setUserData(userInfo.userInfos);
+  //       setUserMainData(userInfo);
+  //       setUserActivity(userActivityData.sessions); 
+  //       setUserAverageSessions(userAverageSessionsData.sessions);
+  //       setUserPerformance(userPerformanceData.data);
+
+  //     } catch (error) {
+  //       console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+  //     }
+  //   }
+
+  //   fetchData();
+  // }, [userId]);
+
   // Vérifier si les données sont toujours en train d'être chargées
-  if (userData === null || userMainData === null || userActivity.length === 0) {
+  if ( userMainData === null || userActivity.length === 0) {
     return <div>Chargement...</div>;
   }
 
+
+
   const weights = userActivity.map((session) => session.kilogram);
   const calories = userActivity.map((session) => session.calories);
+
+
 
   const minWeight = Math.min(...weights) - 1;
   const maxWeight = Math.max(...weights) + 1;
@@ -67,6 +125,7 @@ const StatGraph = ({ userId }) => {
     { name: 'Score', value: userMainData.hasOwnProperty('todayscore') ? userMainData.todayscore : userMainData.score, color: '#ff0101' },
     { name: 'Reste', value: 1 - (userMainData.hasOwnProperty('todayscore') ? userMainData.todayscore : userMainData.score), color: 'transparent' },
   ];
+  console.log(dataPie)
   
 
   
@@ -84,7 +143,7 @@ const StatGraph = ({ userId }) => {
     value: performance.value,
   }));
 
-
+console.log(performanceData)
 
   return (
     <section className="user-stats-graph">
